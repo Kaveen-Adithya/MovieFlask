@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎥 Watching {{ filename }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="watch-page">
+    <video controls muted>
+        <source src="{{ url_for('stream', filename=filename) }}" type="video/mp4">
+        Your browser doesn’t support the video tag 😢
+    </video>
+
+    <a href="{{ url_for('index') }}" class="back">⬅️ Back to MovieFlex</a>
+</body>
+</html>
