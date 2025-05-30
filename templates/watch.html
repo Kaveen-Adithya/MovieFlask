@@ -11,7 +11,17 @@
         <source src="{{ url_for('stream', filename=filename) }}" type="video/mp4">
         Your browser doesn’t support the video tag 😢
     </video>
+    <div class="details-section">
+            <p class="breadcrumbs">Home • TV •</p>
+    <div class="tags">
+                <span class="tag">PG-13</span>
+                <span class="tag">HD</span>
+                <span class="tag">💬 Sub</span>
+                <span class="tag">🎤 Dub</span>
+                <span class="tag">23m</span>
 
+        <p class="share"><b>📢 Share:</b> tell your friends!</p>
+    </div>
     <a href="{{ url_for('index') }}" class="back">⬅️ Back to MovieFlex</a>
 </body>
 </html>
