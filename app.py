@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, send_from_directory
 app = Flask(__name__)
 
 CACHE_FILE = "cache.json"
-MOVIE_DIR = "/media/kaveen/New Volume/Plex/Movies"
+MOVIE_DIR = "D:/Plex/Movies"
 
 def load_cache():
     if os.path.exists(CACHE_FILE):

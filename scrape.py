@@ -44,6 +44,7 @@ def imdb_search(query, filename=None):  # filename helps us name the image file
         "poster": local_img_path  # use local image
     }
 
+
 def download_image(url, filename):
     if not url:
         return ""
@@ -55,8 +56,11 @@ def download_image(url, filename):
     
     local_path = os.path.join(poster_folder, f"{safe_name}.{ext}")
     
+    # Normalize to forward slashes before returning
+    normalized_path = local_path.replace("\\", "/")
+
     if os.path.exists(local_path):
-        return local_path  # already downloaded
+        return normalized_path  # already downloaded ✅
 
     try:
         response = requests.get(url, stream=True)
@@ -64,7 +68,7 @@ def download_image(url, filename):
             with open(local_path, "wb") as f:
                 for chunk in response.iter_content(1024):
                     f.write(chunk)
-            print(f"✅ Poster saved: {local_path}")
+            print(f"✅ Poster saved: {normalized_path}")
         else:
             print(f"❌ Image download failed ({response.status_code})")
             return ""
@@ -72,7 +76,7 @@ def download_image(url, filename):
         print(f"❌ Error downloading image: {e}")
         return ""
 
-    return local_path
+    return normalized_path
 
 #cleaning title
 def clean_movie_title(filename):
@@ -80,7 +84,7 @@ def clean_movie_title(filename):
     name = name.replace('.', ' ')  # Replace dots with spaces
     name = re.sub(r'\(.*?\)', '', name)  # Remove (2013)
     name = re.sub(r'\[.*?\]', '', name)  # Remove [stuff]
-    name = re.sub(r'\b(Bluray|BluRay|BRRip|WEBRip|720P|1080P|x264|H264|Dual Audio|YIFY|AAC|HDRip|HEVC|HD|480p|2160p|4K|WEB-DL|DVD|CAM|TS|FS|PDVDRip|DVDRip|XviD|DTS|ESubs|mp4|mkv|avi|2016|Sinhala|English|Theligu|Malayalam|Hindi|Tamil|Thamil|2013|20\d{2})\b', '', name, flags=re.IGNORECASE)
+    name = re.sub(r'\b(Bluray|BluRay|BRRip|WEBRip|720P|1080P|x264|H264|Dual Audio|YIFY|AAC|HDRip|HEVC|HD|480p|2160p|4K|WEB-DL|DVD|CAM|TS|FS|PDVDRip|DVDRip|XviD|DTS|ESubs|mp4|mkv|avi|2016|Sinhala|English|Theligu|Malayalam|Hindi|Tamil|Thamil|2013|2024|1080p|10bit|DS4K|AMZN|WEBRip|Multi3|DDP5|x|20\d{2})\b', '', name, flags=re.IGNORECASE)
     name = re.sub(r'[^a-zA-Z0-9\s]', '', name)  # Remove weird symbols
     name = re.sub(r'\s+', ' ', name).strip()  # Clean up spacing
     return name
@@ -93,5 +97,6 @@ def get_high_res_img_url(thumbnail_url):
 
 
 def hook(filename):
+    print(filename)
     clean_title = clean_movie_title(filename)
     return imdb_search(clean_title, filename=clean_title)
