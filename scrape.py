@@ -84,7 +84,7 @@ def clean_movie_title(filename):
     name = name.replace('.', ' ')  # Replace dots with spaces
     name = re.sub(r'\(.*?\)', '', name)  # Remove (2013)
     name = re.sub(r'\[.*?\]', '', name)  # Remove [stuff]
-    name = re.sub(r'\b(Bluray|BluRay|BRRip|WEBRip|720P|1080P|x264|H264|Dual Audio|YIFY|AAC|HDRip|HEVC|HD|480p|2160p|4K|WEB-DL|DVD|CAM|TS|FS|PDVDRip|DVDRip|XviD|DTS|ESubs|mp4|mkv|avi|2016|Sinhala|English|Theligu|Malayalam|Hindi|Tamil|Thamil|2013|2024|1080p|10bit|DS4K|AMZN|WEBRip|Multi3|DDP5|x|20\d{2})\b', '', name, flags=re.IGNORECASE)
+    name = re.sub(r'\b(Bluray|BluRay|BRRip|WEBRip|720P|1080P|x264|H264|Dual Audio|YIFY|AAC|HDRip|HEVC|HD|480p|2160p|4K|WEB-DL|DVD|CAM|TS|FS|PDVDRip|DVDRip|XviD|DTS|ESubs|mp4|mkv|avi|2016|Sinhala|English|Theligu|(2025)|Telugu|HDLeak-|Malayalam|Hindi|Tamil|Thamil|2013|2024|2025|Telugu|1080p|10bit|DS4K|AMZN|WEBRip|Multi3|DDP5|CineSubz.com|-|x|20\d{2})\b', '', name, flags=re.IGNORECASE)
     name = re.sub(r'[^a-zA-Z0-9\s]', '', name)  # Remove weird symbols
     name = re.sub(r'\s+', ' ', name).strip()  # Clean up spacing
     return name
